@@ -304,6 +304,9 @@
               <div id="progress-history" style="color: ${textColor}; font-size: ${baseSize * 0.9}px;">
                 Belum ada data
               </div>
+              <button id="restart-game-btn" style="background: ${primaryColor}; color: white; padding: 16px 48px; border-radius: 8px; border: none; font-size: ${baseSize * 1.1}px; font-weight: bold; cursor: pointer; font-family: ${fontFamily}; width: 100%; margin-top: 24px;">
+                🔄 Main Lagi
+              </button>
             </div>
           </main>
         </div>
@@ -311,6 +314,12 @@
 
       renderBlocks();
       attachEventListeners();
+      
+      // Attach restart button listener
+      const restartBtn = document.getElementById('restart-game-btn');
+      if (restartBtn) {
+        restartBtn.addEventListener('click', restartGame);
+      }
     }
 
     function renderBlocks() {
@@ -495,12 +504,20 @@
       if (output.trim() === level.target.trim()) {
         gameState.score += level.level * 100;
         document.getElementById('score-display').textContent = gameState.score;
-        showFeedback('🎉 Benar! Kode kamu berhasil! Level selesai!', true);
-        document.getElementById('next-level-btn').style.display = 'block';
         
-        // Jika level terakhir selesai, simpan ke leaderboard
+        // Jika level terakhir selesai, simpan ke leaderboard dan tampilkan
         if (gameState.currentLevel === levels.length) {
           saveToLeaderboard();
+          showFeedback('🎊 Selamat! Kamu sudah menyelesaikan semua level!', true);
+          document.getElementById('next-level-btn').style.display = 'none';
+          
+          // Scroll ke leaderboard
+          setTimeout(() => {
+            document.getElementById('leaderboard-section').scrollIntoView({ behavior: 'smooth' });
+          }, 1000);
+        } else {
+          showFeedback('🎉 Benar! Kode kamu berhasil! Level selesai!', true);
+          document.getElementById('next-level-btn').style.display = 'block';
         }
       } else {
         showFeedback('❌ Output belum sesuai target. Coba periksa lagi!', false);
@@ -837,13 +854,25 @@
         gameState.currentLevel++;
         clearCodeArea();
         renderApp();
-      } else {
-        showFeedback('🎊 Selamat! Kamu sudah menyelesaikan semua level! Cek <em>leaderboard</em> di bawah.', true);
-        document.getElementById('next-level-btn').style.display = 'none';
       }
+    }
+
+    function restartGame() {
+      // Reset game state
+      gameState = {
+        currentLevel: 1,
+        score: 0,
+        draggedBlock: null,
+        playerName: '',
+        startTime: null,
+        gameStarted: false
+      };
+      
+      // Kembali ke halaman awal
+      renderNameScreen();
     }
 
     document.addEventListener('DOMContentLoaded', initApp);
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b7896d5e1d58352',t:'MTc2NzMzOTQyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b78ab87664b229b',t:'MTc2NzM0MDI3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
