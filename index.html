@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pertualangan Nested Loop</title>
+  <title>Pertualangan <em>Nested Loop</em> </title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -50,7 +50,7 @@
       secondary_action_color: "#3b82f6",
       font_family: "Arial",
       font_size: 16,
-      game_title: "Pertualangan Nested Loop",
+      game_title: "Pertualangan <em>Nested Loop</em>",
       instruction_text: "Susun blok perulangan untuk mencapai target!"
     };
     let gameState = {
@@ -76,8 +76,8 @@
           { type: "for", label: "FOR i = 1 TO 3", iterations: 3, order: 0, isCorrect: false },
           { type: "for", label: "FOR i = 1 TO 7", iterations: 7, order: 0, isCorrect: false },
           { type: "for", label: "FOR j = 1 TO 4", iterations: 4, order: 0, isCorrect: false }
-        ],
-             },
+        ]
+      },
       {
         level: 2,
         title: "Level 2: Dua Baris",
@@ -92,8 +92,8 @@
           { type: "for", label: "FOR i = 1 TO 3", iterations: 3, order: 0, isCorrect: false },
           { type: "for", label: "FOR j = 1 TO 2", iterations: 2, order: 1, isCorrect: false },
           { type: "for", label: "FOR k = 1 TO 5", iterations: 5, order: 1, isCorrect: false }
-        ],
-             },
+        ]
+      },
       {
         level: 3,
         title: "Level 3: Kotak 3x3",
@@ -108,8 +108,8 @@
           { type: "for", label: "FOR i = 1 TO 4", iterations: 4, order: 0, isCorrect: false },
           { type: "for", label: "FOR j = 1 TO 2", iterations: 2, order: 1, isCorrect: false },
           { type: "for", label: "FOR k = 1 TO 3", iterations: 3, order: 1, isCorrect: false }
-        ],
-            },
+        ]
+      },
       {
         level: 4,
         title: "Level 4: Tangga Naik",
@@ -124,8 +124,8 @@
           { type: "for", label: "FOR i = 1 TO 5", iterations: 5, order: 0, isCorrect: false },
           { type: "for", label: "FOR j = 1 TO 4", iterations: 4, order: 1, isCorrect: false },
           { type: "for", label: "FOR j = 1 TO 3", iterations: 3, order: 1, isCorrect: false }
-        ],
-              },
+        ]
+      },
       {
         level: 5,
         title: "Level 5: Piramida",
@@ -141,8 +141,8 @@
           { type: "for", label: "FOR i = 1 TO 5", iterations: 5, order: 0, isCorrect: false },
           { type: "for", label: "FOR s = 1 TO i", iterations: "variable", order: 1, isCorrect: false },
           { type: "for", label: "FOR j = 1 TO i", iterations: "variable", order: 2, isCorrect: false }
-        ],
-             }
+        ]
+      }
     ];
 
     function initApp() {
@@ -233,14 +233,9 @@
                   <label style="color: ${textColor}; font-size: ${baseSize * 0.9}px; display: block; margin-bottom: 6px; font-weight: bold;">📝 Keterangan Variabel:</label>
                   <pre id="variables-info" style="color: ${textColor}; font-size: ${baseSize * 0.85}px; white-space: pre-wrap; line-height: 1.6;">${levels[gameState.currentLevel - 1].variables}</pre>
                 </div>
-                <div style="background: ${backgroundColor}; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
-                  <label style="color: ${textColor}; font-size: ${baseSize * 0.9}px; display: block; margin-bottom: 8px;">Target Output:</label>
+                <div style="background: ${backgroundColor}; padding: 16px; border-radius: 8px;">
+                  <label style="color: ${textColor}; font-size: ${baseSize * 0.9}px; display: block; margin-bottom: 8px;">Target <em>Output</em>:</label>
                   <pre id="target-output" style="color: ${primaryColor}; font-size: ${baseSize * 1.2}px; font-family: monospace; white-space: pre;">${levels[gameState.currentLevel - 1].target}</pre>
-                </div>
-                <div style="background: rgba(59, 130, 246, 0.1); padding: 12px; border-radius: 8px; border-left: 4px solid ${secondaryColor};">
-                  <p id="hint-text" style="color: ${textColor}; font-size: ${baseSize * 0.85}px;">
-                    💡 ${levels[gameState.currentLevel - 1].hint}
-                  </p>
                 </div>
               </div>
 
@@ -250,7 +245,7 @@
                   📦 Blok Tersedia
                 </h3>
                 <p style="color: ${textColor}; font-size: ${baseSize * 0.85}px; margin-bottom: 12px; opacity: 0.9;">
-                  ⚠️ Susun blok sesuai urutan: loop luar di atas, loop dalam di bawah! Pilih blok yang tepat.
+                  ⚠️ Susun blok sesuai urutan: <em>loop</em> luar di atas, <em>loop</em> dalam di bawah! Pilih blok yang tepat.
                 </p>
                 <div id="available-blocks" style="display: flex; flex-direction: column; gap: 12px;">
                   <!-- Blocks will be rendered here -->
@@ -274,7 +269,7 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
               <div style="background: ${surfaceColor}; padding: 24px; border-radius: 12px;">
                 <h3 style="font-size: ${baseSize * 1.3}px; font-weight: bold; color: ${textColor}; margin-bottom: 16px;">
-                  📊 Output Program
+                  📊 <em>Output</em> Program
                 </h3>
                 <div style="background: ${backgroundColor}; padding: 16px; border-radius: 8px; min-height: 150px;">
                   <pre id="program-output" style="color: ${textColor}; font-size: ${baseSize * 1.1}px; font-family: monospace; white-space: pre;">Belum ada output</pre>
@@ -304,7 +299,7 @@
             <!-- Leaderboard -->
             <div id="leaderboard-section" style="background: ${surfaceColor}; padding: 24px; border-radius: 12px; margin-top: 24px;">
               <h3 style="font-size: ${baseSize * 1.3}px; font-weight: bold; color: ${textColor}; margin-bottom: 16px;">
-                🏆 Leaderboard - Tercepat Menyelesaikan Semua Level
+                🏆 <em>Leaderboard</em> - Tercepat Menyelesaikan Semua Level
               </h3>
               <div id="progress-history" style="color: ${textColor}; font-size: ${baseSize * 0.9}px;">
                 Belum ada data
@@ -486,7 +481,7 @@
         // Cek urutan blok
         if (blockData.label.trim() !== expectedBlock.label.trim() || blockData.order !== expectedBlock.order) {
           isValid = false;
-          errorMessage = '❌ Urutan blok salah! Loop luar harus di atas, loop dalam di bawahnya.';
+          errorMessage = '❌ Urutan blok salah! <em>Loop</em> luar harus di atas, <em>loop</em> dalam di bawahnya.';
           return;
         }
       });
@@ -703,7 +698,7 @@
       const fontFamily = `${customFont}, ${baseFontStack}`;
       
       if (!leaderboardData || leaderboardData.length === 0) {
-        container.innerHTML = `<p style="color: ${textColor}; opacity: 0.7; font-size: ${baseSize * 0.9}px; font-family: ${fontFamily};">Belum ada data. Selesaikan semua level untuk masuk leaderboard!</p>`;
+        container.innerHTML = `<p style="color: ${textColor}; opacity: 0.7; font-size: ${baseSize * 0.9}px; font-family: ${fontFamily};">Belum ada data. Selesaikan semua level untuk masuk <em>leaderboard</em>!</p>`;
         return;
       }
 
@@ -787,7 +782,7 @@
                 id="start-game-btn"
                 style="background: ${primaryColor}; color: white; padding: 16px 48px; border-radius: 8px; border: none; font-size: ${baseSize * 1.2}px; font-weight: bold; cursor: pointer; font-family: ${fontFamily}; width: 100%;"
               >
-                🚀 Mulai Pertualangan!
+                🚀 Mulai Petualangan!
               </button>
               
               <div id="name-error" style="color: #ef4444; font-size: ${baseSize * 0.9}px; margin-top: 12px; display: none;"></div>
@@ -796,7 +791,7 @@
             <!-- Leaderboard Preview -->
             <div style="background: ${surfaceColor}; padding: 24px; border-radius: 12px; margin-top: 24px;">
               <h3 style="font-size: ${baseSize * 1.3}px; font-weight: bold; color: ${textColor}; margin-bottom: 16px; text-align: center;">
-                🏆 Leaderboard Tercepat
+                🏆 <em>Leaderboard</em> Tercepat
               </h3>
               <div id="progress-history" style="color: ${textColor}; font-size: ${baseSize * 0.9}px;">
                 Memuat data...
@@ -843,12 +838,12 @@
         clearCodeArea();
         renderApp();
       } else {
-        showFeedback('🎊 Selamat! Kamu sudah menyelesaikan semua level! Cek leaderboard di bawah.', true);
+        showFeedback('🎊 Selamat! Kamu sudah menyelesaikan semua level! Cek <em>leaderboard</em> di bawah.', true);
         document.getElementById('next-level-btn').style.display = 'none';
       }
     }
 
     document.addEventListener('DOMContentLoaded', initApp);
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b7851abd36e243f',t:'MTc2NzMzNjU5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b7896d5e1d58352',t:'MTc2NzMzOTQyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
