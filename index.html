@@ -304,7 +304,7 @@
               <div id="progress-history" style="color: ${textColor}; font-size: ${baseSize * 0.9}px;">
                 Belum ada data
               </div>
-              <button id="restart-game-btn" style="background: ${primaryColor}; color: white; padding: 16px 48px; border-radius: 8px; border: none; font-size: ${baseSize * 1.1}px; font-weight: bold; cursor: pointer; font-family: ${fontFamily}; width: 100%; margin-top: 24px;">
+              <button id="restart-game-btn" style="background: ${primaryColor}; color: white; padding: 16px 48px; border-radius: 8px; border: none; font-size: ${baseSize * 1.1}px; font-weight: bold; cursor: pointer; font-family: ${fontFamily}; width: 100%; margin-top: 24px; display: none;">
                 🔄 Main Lagi
               </button>
             </div>
@@ -510,6 +510,7 @@
           saveToLeaderboard();
           showFeedback('🎊 Selamat! Kamu sudah menyelesaikan semua level!', true);
           document.getElementById('next-level-btn').style.display = 'none';
+          document.getElementById('restart-game-btn').style.display = 'block';
           
           // Scroll ke leaderboard
           setTimeout(() => {
@@ -874,5 +875,5 @@
 
     document.addEventListener('DOMContentLoaded', initApp);
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b78ab87664b229b',t:'MTc2NzM0MDI3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b78b71d0530ef6e',t:'MTc2NzM0MDc0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
