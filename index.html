@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pertualangan <em>Nested Loop</em> </title>
+  <title>Pertualangan Nested Loop</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -34,24 +34,86 @@
     .celebrating {
       animation: celebrate 0.5s ease-in-out;
     }
+    
+    .virtual-keyboard {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #1e293b;
+      padding: 16px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    
+    .virtual-keyboard.active {
+      display: block;
+    }
+    
+    .keyboard-row {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    
+    .key-btn {
+      min-width: 40px;
+      padding: 12px 8px;
+      background: #334155;
+      color: #f1f5f9;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.1s;
+      user-select: none;
+    }
+    
+    .key-btn:active {
+      background: #8b5cf6;
+      transform: scale(0.95);
+    }
+    
+    .key-btn.wide {
+      min-width: 80px;
+    }
+    
+    .key-btn.extra-wide {
+      min-width: 160px;
+    }
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full">
-  <div id="app" class="h-full w-full overflow-auto"></div>
+  <div id="app" class="h-full w-full overflow-auto"></div><!-- Virtual Keyboard -->
+  <div id="virtual-keyboard" class="virtual-keyboard">
+   <div class="keyboard-row"><button class="key-btn" data-key="1">1</button> <button class="key-btn" data-key="2">2</button> <button class="key-btn" data-key="3">3</button> <button class="key-btn" data-key="4">4</button> <button class="key-btn" data-key="5">5</button> <button class="key-btn" data-key="6">6</button> <button class="key-btn" data-key="7">7</button> <button class="key-btn" data-key="8">8</button> <button class="key-btn" data-key="9">9</button> <button class="key-btn" data-key="0">0</button>
+   </div>
+   <div class="keyboard-row"><button class="key-btn" data-key="Q">Q</button> <button class="key-btn" data-key="W">W</button> <button class="key-btn" data-key="E">E</button> <button class="key-btn" data-key="R">R</button> <button class="key-btn" data-key="T">T</button> <button class="key-btn" data-key="Y">Y</button> <button class="key-btn" data-key="U">U</button> <button class="key-btn" data-key="I">I</button> <button class="key-btn" data-key="O">O</button> <button class="key-btn" data-key="P">P</button>
+   </div>
+   <div class="keyboard-row"><button class="key-btn" data-key="A">A</button> <button class="key-btn" data-key="S">S</button> <button class="key-btn" data-key="D">D</button> <button class="key-btn" data-key="F">F</button> <button class="key-btn" data-key="G">G</button> <button class="key-btn" data-key="H">H</button> <button class="key-btn" data-key="J">J</button> <button class="key-btn" data-key="K">K</button> <button class="key-btn" data-key="L">L</button>
+   </div>
+   <div class="keyboard-row"><button class="key-btn wide" data-key="SHIFT">⇧ Shift</button> <button class="key-btn" data-key="Z">Z</button> <button class="key-btn" data-key="X">X</button> <button class="key-btn" data-key="C">C</button> <button class="key-btn" data-key="V">V</button> <button class="key-btn" data-key="B">B</button> <button class="key-btn" data-key="N">N</button> <button class="key-btn" data-key="M">M</button> <button class="key-btn wide" data-key="BACKSPACE">⌫ Del</button>
+   </div>
+   <div class="keyboard-row"><button class="key-btn extra-wide" data-key="SPACE">Space</button> <button class="key-btn wide" data-key="CLOSE">✓ Tutup</button>
+   </div>
+  </div>
   <script>
     const config = {
-      background_color: "#1e293b",
-      surface_color: "#334155",
+      background_color: "#0f172a",
+      surface_color: "#1e293b",
       text_color: "#f1f5f9",
-      primary_action_color: "#10b981",
-      secondary_action_color: "#3b82f6",
+      primary_action_color: "#8b5cf6",
+      secondary_action_color: "#06b6d4",
       font_family: "Arial",
       font_size: 16,
-      game_title: "Pertualangan <em>Nested Loop</em>",
-      instruction_text: "Susun blok perulangan untuk mencapai target!"
+      game_title: "Perulangan Bertingkat dalam Program",
+      instruction_text: "Ayo, susun blok perulangan bertingkat dan pecahkan tantangan untuk membentuk pola bintang!"
     };
     let gameState = {
       currentLevel: 1,
@@ -60,6 +122,11 @@
       playerName: '',
       startTime: null,
       gameStarted: false
+    };
+    
+    let keyboardState = {
+      isShiftActive: false,
+      activeInput: null
     };
 
     const levels = [
@@ -531,7 +598,7 @@
       
       if (level.level === 1) {
         for (let i = 0; i < 5; i++) {
-          output += '★';
+          output += '��';
         }
       } else if (level.level === 2) {
         for (let i = 0; i < 2; i++) {
@@ -785,14 +852,15 @@
               
               <div style="margin-bottom: 32px;">
                 <label for="player-name-input" style="display: block; color: ${textColor}; font-size: ${baseSize}px; margin-bottom: 12px; font-weight: bold;">
-                  Masukkan Nama Kamu:
+                  Masukkan Nama:
                 </label>
                 <input 
                   type="text" 
                   id="player-name-input"
                   placeholder="Nama pemain..."
                   maxlength="20"
-                  style="width: 100%; padding: 16px; border-radius: 8px; border: 2px solid ${primaryColor}; font-size: ${baseSize * 1.1}px; font-family: ${fontFamily}; background: ${backgroundColor}; color: ${textColor}; box-sizing: border-box;"
+                  readonly
+                  style="width: 100%; padding: 16px; border-radius: 8px; border: 2px solid ${primaryColor}; font-size: ${baseSize * 1.1}px; font-family: ${fontFamily}; background: ${backgroundColor}; color: ${textColor}; box-sizing: border-box; cursor: pointer;"
                 />
               </div>
               
@@ -800,7 +868,7 @@
                 id="start-game-btn"
                 style="background: ${primaryColor}; color: white; padding: 16px 48px; border-radius: 8px; border: none; font-size: ${baseSize * 1.2}px; font-weight: bold; cursor: pointer; font-family: ${fontFamily}; width: 100%;"
               >
-                🚀 Mulai Pertualangan!
+                🚀 Mulai Petualangan!
               </button>
               
               <div id="name-error" style="color: #ef4444; font-size: ${baseSize * 0.9}px; margin-top: 12px; display: none;"></div>
@@ -819,11 +887,25 @@
         </div>
       `;
 
+      const nameInput = document.getElementById('player-name-input');
+      
       document.getElementById('start-game-btn').addEventListener('click', startGame);
-      document.getElementById('player-name-input').addEventListener('keypress', (e) => {
+      
+      nameInput.addEventListener('focus', function() {
+        showVirtualKeyboard(this);
+      });
+      
+      nameInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
           startGame();
         }
+      });
+      
+      // Prevent native keyboard on mobile
+      nameInput.addEventListener('click', function(e) {
+        e.preventDefault();
+        this.focus();
+        showVirtualKeyboard(this);
       });
       
       renderLeaderboard();
@@ -873,7 +955,90 @@
       renderNameScreen();
     }
 
-    document.addEventListener('DOMContentLoaded', initApp);
+    function initVirtualKeyboard() {
+      const keyboard = document.getElementById('virtual-keyboard');
+      const keys = keyboard.querySelectorAll('.key-btn');
+      
+      keys.forEach(key => {
+        key.addEventListener('click', function(e) {
+          e.preventDefault();
+          const keyValue = this.getAttribute('data-key');
+          handleVirtualKey(keyValue);
+        });
+      });
+    }
+    
+    function handleVirtualKey(key) {
+      if (key === 'CLOSE') {
+        hideVirtualKeyboard();
+        return;
+      }
+      
+      if (!keyboardState.activeInput) return;
+      
+      const input = keyboardState.activeInput;
+      const currentValue = input.value;
+      const cursorPos = input.selectionStart || currentValue.length;
+      
+      if (key === 'BACKSPACE') {
+        if (cursorPos > 0) {
+          input.value = currentValue.slice(0, cursorPos - 1) + currentValue.slice(cursorPos);
+          input.setSelectionRange(cursorPos - 1, cursorPos - 1);
+        }
+      } else if (key === 'SPACE') {
+        if (currentValue.length < 20) {
+          input.value = currentValue.slice(0, cursorPos) + ' ' + currentValue.slice(cursorPos);
+          input.setSelectionRange(cursorPos + 1, cursorPos + 1);
+        }
+      } else if (key === 'SHIFT') {
+        keyboardState.isShiftActive = !keyboardState.isShiftActive;
+        updateShiftKey();
+      } else {
+        if (currentValue.length < 20) {
+          const char = keyboardState.isShiftActive ? key : key.toLowerCase();
+          input.value = currentValue.slice(0, cursorPos) + char + currentValue.slice(cursorPos);
+          input.setSelectionRange(cursorPos + 1, cursorPos + 1);
+          
+          if (keyboardState.isShiftActive) {
+            keyboardState.isShiftActive = false;
+            updateShiftKey();
+          }
+        }
+      }
+      
+      input.focus();
+    }
+    
+    function updateShiftKey() {
+      const shiftBtn = document.querySelector('[data-key="SHIFT"]');
+      if (shiftBtn) {
+        shiftBtn.style.background = keyboardState.isShiftActive ? '#8b5cf6' : '#334155';
+      }
+    }
+    
+    function showVirtualKeyboard(input) {
+      keyboardState.activeInput = input;
+      const keyboard = document.getElementById('virtual-keyboard');
+      keyboard.classList.add('active');
+      
+      // Adjust scroll to show input above keyboard
+      setTimeout(() => {
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+    
+    function hideVirtualKeyboard() {
+      keyboardState.activeInput = null;
+      keyboardState.isShiftActive = false;
+      const keyboard = document.getElementById('virtual-keyboard');
+      keyboard.classList.remove('active');
+      updateShiftKey();
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      initApp();
+      initVirtualKeyboard();
+    });
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b78b71d0530ef6e',t:'MTc2NzM0MDc0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9baa5c0bc1de229b',t:'MTc2Nzg2MTMwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
