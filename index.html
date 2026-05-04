@@ -467,20 +467,26 @@ const config = {
       }
 
       const placedCount = codeArea.querySelectorAll('.placed-block').length;
+     const colors = ["#6366f1", "#4f46e5", "#4338ca"];
+     const color = colors[placedCount % colors.length];
 
       const blockDiv = document.createElement('div');
       blockDiv.className = 'placed-block';
       blockDiv.blockData = gameState.draggedBlock;
       blockDiv.style.cssText = `
-background: linear-gradient(135deg, #6366f1, #4f46e5);
-color: white;
-padding: 12px 16px;
-border-radius: 10px;
-margin-bottom: 8px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  background: linear-gradient(135deg, ${color}, #3730a3);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: monospace;
+  font-size: ${baseSize * 0.9}px;
+  margin-left: ${placedCount * 40}px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-left: 4px solid #a5b4fc;
 `;
       blockDiv.innerHTML = `
         <span>${gameState.draggedBlock.label}</span>
