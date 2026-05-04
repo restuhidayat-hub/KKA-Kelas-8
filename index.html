@@ -27,8 +27,8 @@
     }
     
     .drop-zone-active {
-      background-color: rgba(34, 197, 94, 0.3);
-      border-color: #16a34a;
+      background-color: rgba(34, 197, 94, 0.2);
+      border-color: #22c55e;
     }
     
     .celebrating {
@@ -41,7 +41,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: #0ea5e9;
+      background: #1e293b;
       padding: 16px;
       box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
       z-index: 1000;
@@ -61,9 +61,9 @@
     .key-btn {
       min-width: 40px;
       padding: 12px 8px;
-      background: #ffffff;
-      color: #0f172a;
-      border: 1px solid #bae6fd;
+      background: #334155;
+      color: #f1f5f9;
+      border: 1px solid #475569;
       border-radius: 6px;
       font-size: 16px;
       font-weight: 600;
@@ -72,10 +72,8 @@
       user-select: none;
     }
     
-.key-btn:active {
-  background: #22c55e;
-  color: white;
-}
+    .key-btn:active {
+      background: #8b5cf6;
       transform: scale(0.95);
     }
     
@@ -107,11 +105,11 @@
   </div>
   <script>
     const config = {
-  background_color: "#0ea5e9",       // biru cerah (lebih hidup dari gelap)
-  surface_color: "#ffffff",          // putih bersih (fokus ke konten)
-  text_color: "#0f172a",             // teks gelap biar kontras
-  primary_action_color: "#22c55e",   // hijau fresh (aksi utama)
-  secondary_action_color: "#f59e0b", // oranye cerah (interaktif)
+      background_color: "#0f172a",
+      surface_color: "#1e293b",
+      text_color: "#f1f5f9",
+      primary_action_color: "#8b5cf6",
+      secondary_action_color: "#06b6d4",
       font_family: "Arial",
       font_size: 16,
       game_title: "Perulangan Bertingkat dalam Program",
@@ -259,7 +257,7 @@
       const instructionText = config.instruction_text;
 
       app.innerHTML = `
-        <div style="background: linear-gradient(135deg, #0ea5e9, #38bdf8); min-height: 100%; padding: 24px; font-family: ${fontFamily};">
+        <div style="background: ${backgroundColor}; min-height: 100%; padding: 24px; font-family: ${fontFamily};">
           <!-- Header -->
           <header style="text-align: center; margin-bottom: 32px;">
             <h1 style="font-size: ${baseSize * 2}px; font-weight: bold; color: ${textColor}; margin-bottom: 8px;">
@@ -298,11 +296,11 @@
                 <p id="level-description" style="color: ${textColor}; font-size: ${baseSize}px; margin-bottom: 16px;">
                   ${levels[gameState.currentLevel - 1].description}
                 </p>
-                <div style="background: rgba(34, 197, 94, 0.15); padding: 12px; border-radius: 8px; border-left: 4px solid ${primaryColor}; margin-bottom: 12px;">
+                <div style="background: rgba(16, 185, 129, 0.1); padding: 12px; border-radius: 8px; border-left: 4px solid ${primaryColor}; margin-bottom: 12px;">
                   <label style="color: ${textColor}; font-size: ${baseSize * 0.9}px; display: block; margin-bottom: 6px; font-weight: bold;">📝 Keterangan Variabel:</label>
                   <pre id="variables-info" style="color: ${textColor}; font-size: ${baseSize * 0.85}px; white-space: pre-wrap; line-height: 1.6;">${levels[gameState.currentLevel - 1].variables}</pre>
                 </div>
-                <div style="background: linear-gradient(135deg, #0ea5e9, #38bdf8); padding: 16px; border-radius: 8px;">
+                <div style="background: ${backgroundColor}; padding: 16px; border-radius: 8px;">
                   <label style="color: ${textColor}; font-size: ${baseSize * 0.9}px; display: block; margin-bottom: 8px;">Target <em>Output</em>:</label>
                   <pre id="target-output" style="color: ${primaryColor}; font-size: ${baseSize * 1.2}px; font-family: monospace; white-space: pre;">${levels[gameState.currentLevel - 1].target}</pre>
                 </div>
@@ -327,7 +325,7 @@
               <h3 style="font-size: ${baseSize * 1.3}px; font-weight: bold; color: ${textColor}; margin-bottom: 16px;">
                 🔧 Area Penyusunan Kode
               </h3>
-              <div id="code-area" style="background: linear-gradient(135deg, #0ea5e9, #38bdf8); padding: 20px; border-radius: 8px; min-height: 200px; border: 2px dashed ${primaryColor};">
+              <div id="code-area" style="background: ${backgroundColor}; padding: 20px; border-radius: 8px; min-height: 200px; border: 2px dashed ${primaryColor};">
                 <p style="color: ${textColor}; opacity: 0.5; text-align: center; font-size: ${baseSize}px;">
                   Tarik blok ke sini untuk menyusun kode
                 </p>
@@ -340,7 +338,7 @@
                 <h3 style="font-size: ${baseSize * 1.3}px; font-weight: bold; color: ${textColor}; margin-bottom: 16px;">
                   📊 <em>Output</em> Program
                 </h3>
-                <div style="background: linear-gradient(135deg, #0ea5e9, #38bdf8); padding: 16px; border-radius: 8px; min-height: 150px;">
+                <div style="background: ${backgroundColor}; padding: 16px; border-radius: 8px; min-height: 150px;">
                   <pre id="program-output" style="color: ${textColor}; font-size: ${baseSize * 1.1}px; font-family: monospace; white-space: pre;">Belum ada output</pre>
                 </div>
                 <div id="feedback-message" style="margin-top: 12px; padding: 12px; border-radius: 8px; display: none;">
@@ -809,7 +807,7 @@
         const medal = medals[index] || `${index + 1}.`;
         
         return `
-          <div style="background: linear-gradient(135deg, #0ea5e9, #38bdf8); padding: 12px 16px; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <div style="background: ${backgroundColor}; padding: 12px 16px; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
             <div style="display: flex; align-items: center; gap: 12px;">
               <span style="font-size: ${baseSize * 1.3}px;">${medal}</span>
               <div>
@@ -842,7 +840,7 @@
       const instructionText = config.instruction_text;
 
       app.innerHTML = `
-        <div style="background: linear-gradient(135deg, #0ea5e9, #38bdf8); min-height: 100%; padding: 24px; font-family: ${fontFamily}; display: flex; align-items: center; justify-content: center;">
+        <div style="background: ${backgroundColor}; min-height: 100%; padding: 24px; font-family: ${fontFamily}; display: flex; align-items: center; justify-content: center;">
           <div style="max-width: 600px; width: 100%;">
             <div style="background: ${surfaceColor}; padding: 48px; border-radius: 16px; text-align: center;">
               <h1 style="font-size: ${baseSize * 2.5}px; font-weight: bold; color: ${textColor}; margin-bottom: 16px;">
@@ -862,7 +860,7 @@
                   placeholder="Nama pemain..."
                   maxlength="20"
                   readonly
-                  style="width: 100%; padding: 16px; border-radius: 8px; border: 2px solid ${primaryColor}; font-size: ${baseSize * 1.1}px; font-family: ${fontFamily}; background: linear-gradient(135deg, #0ea5e9, #38bdf8); color: ${textColor}; box-sizing: border-box; cursor: pointer;"
+                  style="width: 100%; padding: 16px; border-radius: 8px; border: 2px solid ${primaryColor}; font-size: ${baseSize * 1.1}px; font-family: ${fontFamily}; background: ${backgroundColor}; color: ${textColor}; box-sizing: border-box; cursor: pointer;"
                 />
               </div>
               
