@@ -38,6 +38,13 @@ body {
   box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
   border-top: 1px solid #e5e7eb;
 }
+   .keyboard-row {
+  display: flex;
+  justify-content: center; /* ⬅️ ini bikin tombol ke tengah */
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
 
 .virtual-keyboard.active {
   display: block;
@@ -63,6 +70,13 @@ body {
 .key-btn:active {
   background: #3b82f6;
   color: white;
+}
+   .key-btn.wide {
+  min-width: 80px;
+}
+
+.key-btn.extra-wide {
+  min-width: 200px;
 }
   </style>
   <style>@view-transition { navigation: auto; }</style>
